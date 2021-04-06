@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: bob:1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bob
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bob
+    spec:
+      containers:
+      - image: nginx
+        name: bob
+        resources: {}
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-carros
+  namespace: defaut
+spec:
+  ports:
+    - port: 80
+  type: ClusterIP
+  selector:
+    app: bob
